@@ -15,6 +15,8 @@ public class Book {
 
     private String author;
 
+    private String status; // "Want To Read" "Currently Reading" "Finished"
+
     public Integer getId() {
         return id;
       }
@@ -37,5 +39,13 @@ public class Book {
     
       public void setAuthor(String author) {
         this.author = author;
+      }
+
+      public String getStatus() {
+        return status;
+      }
+    
+      public void setStatus(String status) {
+        this.status = status;
       }
 }
