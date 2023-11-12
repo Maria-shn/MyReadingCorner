@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequestMapping(path="/books")
 
 public class MainController {
@@ -27,6 +28,7 @@ public class MainController {
 
     @PostMapping
     public Book addBook(@RequestBody Book book) {
+        System.out.println("it should work");
         return bookRepository.save(book);
     }
 
