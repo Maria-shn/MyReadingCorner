@@ -2,6 +2,8 @@ package com.example.MyReadingCorner;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,8 +29,13 @@ public class MainController {
     }
 
     @PostMapping
-    public Book addBook(@RequestBody Book book) {
-        return bookRepository.save(book);
+    public ResponseEntity<?> addBook(@RequestBody Book book) {
+
+        if (bookRepository.existsByNameAndAuthor(book.getName(), book.getAuthor())) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body("Book with the same name and author already exists.");
+    }
+        bookRepository.save(book);
+        return ResponseEntity.status(HttpStatus.CREATED).body(book);
     }
 
     @PutMapping("/{id}/status")
