@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>My Reading Corner</title>
+        <link href="resources/" type="text/css" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/314d9b11dc.js" crossorigin="anonymous"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <form id="bookForm">
+            <label for="bookName">Book Name:</label>
+            <input type="text" id="bookName" required>
+        
+            <label for="author">Author:</label>
+            <input type="text" id="author" required>
+        
+            <label for="status">Status:</label>
+            <select id="status">
+                <option value="Want to Read">Want to Read</option>
+                <option value="Currently Reading">Currently Reading</option>
+                <option value="Finished">Finished</option>
+            </select>
+        
+            <button type="button" onclick="addBook()">Add Book</button>
+        </form>
+        <div>
+            <h3>Want to read</h3>
+        </div>
+        <div>
+            <h3>Currently reading</h3>
+        </div>
+        <div>
+            <h3>Finished</h3>
+        </div>
+    </body>
+    <script src="resources/"></script>
+</html>
