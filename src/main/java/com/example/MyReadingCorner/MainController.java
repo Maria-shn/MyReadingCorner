@@ -28,7 +28,6 @@ public class MainController {
 
     @PostMapping
     public Book addBook(@RequestBody Book book) {
-        System.out.println("it should work");
         return bookRepository.save(book);
     }
 
