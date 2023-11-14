@@ -1,10 +1,10 @@
  function addBook() {
-    var bookName = document.getElementById("bookName").value;
+    var title = document.getElementById("title").value;
     var author = document.getElementById("author").value;
     var status = document.getElementById("status").value;
 
     var bookData = {
-        title: bookName,
+        title: title,
         author: author,
         status: status
     };
@@ -25,7 +25,7 @@
     .catch(error => console.error('Error:', error));
 
     // Clear form inputs after adding the book
-    document.getElementById("bookName").value = "";
+    document.getElementById("title").value = "";
     document.getElementById("author").value = "";
 }
 
