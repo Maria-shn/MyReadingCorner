@@ -25,16 +25,28 @@
             <button type="button" onclick="addBook()">Add Book</button>
         </form>
         <form id="updateForm">
-            <label for="id">ID:</label>
+            <label for="updateId">ID:</label>
             <input type="text" id="updateId" required>
         
-            <label for="status">Status:</label>
+            <label for="updateStatus">Status:</label>
             <select id="updateStatus">
                 <option value="Want To Read">Want To Read</option>
                 <option value="Currently Reading">Currently Reading</option>
                 <option value="Finished">Finished</option>
             </select>
             <button type="button" onclick="updateBookStatus()">Update Status</button>
+        </form>
+        <form id="deleteFormById">
+            <label for="deleteId">ID:</label>
+            <input type="text" id="deleteId" required>
+            <button type="button" onclick="deleteBookById()">Delete Book By Id</button>
+        </form>
+        <form id="deleteFormByTitleAndAuthor">
+            <label for="deleteTitle">Title:</label>
+            <input type="text" id="deleteTitle" required>
+            <label for="deleteAuthor">Author:</label>
+            <input type="text" id="deleteAuthor" required>
+            <button type="button" onclick="deleteBookByTitleAndAuthor()">Delete Book By Title And Author</button>
         </form>
             <h3>Want to read</h3>
             <div id="wantToReadList">

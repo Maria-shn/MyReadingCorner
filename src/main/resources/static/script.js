@@ -4,7 +4,7 @@
     var status = document.getElementById("status").value;
 
     var bookData = {
-        name: bookName,
+        title: bookName,
         author: author,
         status: status
     };
@@ -58,7 +58,7 @@ function updateList(listId, books) {
         var ul = document.createElement('ul');
         books.forEach(book => {
             var li = document.createElement('li');
-            li.textContent = `${book.id} ${book.name} by ${book.author}`;
+            li.textContent = `${book.id} ${book.title} by ${book.author}`;
             ul.appendChild(li);
         });
         listContainer.appendChild(ul);
@@ -68,8 +68,6 @@ function updateList(listId, books) {
 async function updateBookStatus() {
     var bookId = document.getElementById("updateId").value;
     var newStatus = document.getElementById("updateStatus").value;
-    console.log('Book ID:', bookId);
-    console.log('New Status:', newStatus);
 
     try {
         // Make a PUT request to update the book status
@@ -89,6 +87,50 @@ async function updateBookStatus() {
         }
     } catch (error) {
         console.error('Error:', error);
+    }
+}
+async function deleteBookById() {
+    var deleteId = document.getElementById("deleteId").value;
+    try {
+        // Make a DELETE request to update the book status
+        const response = await fetch(`/books?id=${deleteId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        updateBookLists();
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error deleting book. Please try again.');
+    }
+}
+
+
+
+async function deleteBookByTitleAndAuthor() {
+    var deleteTitle = document.getElementById("deleteTitle").value;
+    var deleteAuthor = document.getElementById("deleteAuthor").value;
+    try {
+        // Make a DELETE request to update the book status
+        const response = await fetch(`/books?id=0&title=${deleteTitle}&author=${deleteAuthor}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            const deletedBook = await response.json();
+            alert(`Book "${deletedBook.title}" by ${deletedBook.author} deleted successfully!`);
+            updateBookLists(); // Refresh book information after update
+        } else {
+            const errorData = await response.json();
+            alert('Error deleting book: ' + errorData.message);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error deleting book. Please try again.');
     }
 }
 

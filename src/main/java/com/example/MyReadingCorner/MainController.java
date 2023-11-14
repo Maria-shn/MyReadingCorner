@@ -31,18 +31,18 @@ public class MainController {
         return (List<Book>) bookRepository.findAll();
     }
 
-    @GetMapping
-    public List<Book> getByAuthor(@RequestParam String author){
+    @GetMapping("/author")
+    public List<Book> getByAuthor(@RequestParam (name = "author") String author){
         return (List<Book>) bookRepository.findByAuthor(author);
     }
 
-    @GetMapping
-    public List<Book> getByTitle(@RequestParam String title){
+    @GetMapping("/title")
+    public List<Book> getByTitle(@RequestParam (name = "title") String title){
         return (List<Book>) bookRepository.findByTitle(title);
     }
 
-    @GetMapping
-    public Book getByTitleAndAuthor(@RequestParam String title, @RequestParam String author){
+    @GetMapping("/titleandauthor")
+    public Book getByTitleAndAuthor(@RequestParam (name = "title") String title, @RequestParam(name = "author") String author){
         return bookRepository.findByTitleAndAuthor(title, author);
     }
 
@@ -57,7 +57,7 @@ public class MainController {
     }
 
     @PutMapping("/{id}")
-    public Book updateBookStatus(@PathVariable Integer id, @RequestParam String status) {
+    public Book updateBookStatus(@PathVariable Integer id, @RequestParam(name = "status") String status) {
         Optional<Book> optionalBook = bookRepository.findById(id);
         if(!optionalBook.isPresent()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
@@ -67,8 +67,21 @@ public class MainController {
         return bookRepository.save(book);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteBook(@PathVariable Integer id){
-        bookRepository.deleteById(id);
+    @DeleteMapping()
+    public void deleteBook(@RequestParam(name = "id", defaultValue = "0") Integer id, @RequestParam ( name = "title", required = false) String title, @RequestParam ( name = "author", required = false) String author){
+        Book deleteBook ;
+        if(id == 0){
+            if(title == null || author == null || bookRepository.existsByTitleAndAuthor(title, author) == false){
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            }else{
+               deleteBook =  bookRepository.findByTitleAndAuthor(title, author);
+               bookRepository.deleteById(deleteBook.getId());
+            }
+        }else{
+            System.out.println("hereee");
+             bookRepository.deleteById(id);
+        }
+        }
+       
     }
-}
+
