@@ -51,7 +51,10 @@ public class MainController {
 
         if (bookRepository.existsByTitleAndAuthor(book.getTitle(), book.getAuthor())) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body("Book with the same name and author already exists.");
-    }
+        }
+        if(book.getTitle() == null || book.getAuthor() == null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please complete all the fields.");
+        }
         bookRepository.save(book);
         return ResponseEntity.status(HttpStatus.CREATED).body(book);
     }
