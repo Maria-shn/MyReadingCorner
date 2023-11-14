@@ -5,5 +5,8 @@ import com.example.MyReadingCorner.Book;
 
 public interface BookRepository extends CrudRepository<Book, Integer>{
     List<Book> findByStatus(String status);
-    boolean existsByNameAndAuthor(String name, String author);
+    boolean existsByTitleAndAuthor(String title, String author);
+    List<Book> findByAuthor(String author);
+    List<Book> findByTitle(String title);
+    Book findByTitleAndAuthor(String title, String author);
 }
