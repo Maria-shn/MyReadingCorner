@@ -100,6 +100,20 @@ async function deleteBookById() {
             },
         });
         updateBookLists();
+        if (response.redirected) {
+            // If the response is a redirect, handle it accordingly
+            alert('Book deleted successfully!');
+            updateBookLists(); // Refresh book information after update
+        } else if (response.ok) {
+            // If the response is OK and not a redirect, parse the JSON
+            const deletedBook = await response.json();
+            alert(`Book "${deletedBook.title}" by ${deletedBook.author} deleted successfully!`);
+            updateBookLists(); // Refresh book information after update
+        } else {
+            // Handle other error cases
+            const errorData = await response.json();
+            alert('Error deleting book: ' + errorData.message);
+        }
     } catch (error) {
         console.error('Error:', error);
         alert('Error deleting book. Please try again.');
@@ -111,6 +125,9 @@ async function deleteBookById() {
 async function deleteBookByTitleAndAuthor() {
     var deleteTitle = document.getElementById("deleteTitle").value;
     var deleteAuthor = document.getElementById("deleteAuthor").value;
+    if(!deleteTitle || !deleteAuthor){
+        alert('Please provide a title and an author');
+    }
     try {
         // Make a DELETE request to update the book status
         const response = await fetch(`/books?id=0&title=${deleteTitle}&author=${deleteAuthor}`, {

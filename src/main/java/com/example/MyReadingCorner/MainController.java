@@ -68,18 +68,20 @@ public class MainController {
     }
 
     @DeleteMapping()
-    public void deleteBook(@RequestParam(name = "id", defaultValue = "0") Integer id, @RequestParam ( name = "title", required = false) String title, @RequestParam ( name = "author", required = false) String author){
+    public Book deleteBook(@RequestParam(name = "id", defaultValue = "0") Integer id, @RequestParam ( name = "title", required = false) String title, @RequestParam ( name = "author", required = false) String author){
         Book deleteBook ;
         if(id == 0){
-            if(title == null || author == null || bookRepository.existsByTitleAndAuthor(title, author) == false){
+            if(bookRepository.existsByTitleAndAuthor(title, author) == false){
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND);
             }else{
                deleteBook =  bookRepository.findByTitleAndAuthor(title, author);
                bookRepository.deleteById(deleteBook.getId());
+               return deleteBook;
             }
         }else{
-            System.out.println("hereee");
+             deleteBook = bookRepository.findById(id).get();
              bookRepository.deleteById(id);
+             return deleteBook;
         }
         }
        
