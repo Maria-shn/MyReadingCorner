@@ -3,11 +3,12 @@
     <head>
         <meta charset="utf-8">
         <title>My Reading Corner</title>
-        <!--link href="resources/" type="text/css" rel="stylesheet"-->
+        <link href="styles.css" type="text/css" rel="stylesheet">
         <script src="./script.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
+        <div id="forms">
         <form id="bookForm">
             <label for="title">Book Title:</label>
             <input type="text" id="title" required>
@@ -48,14 +49,20 @@
             <input type="text" id="deleteAuthor" required>
             <button type="button" onclick="deleteBookByTitleAndAuthor()">Delete Book By Title And Author</button>
         </form>
+        </div>
+        <div id="lists">
+            <div id="list1" class="list">
             <h3>Want to read</h3>
-            <div id="wantToReadList">
-             </div>
+            <div id="wantToReadList"></div>
+            </div>
+            <div id="list2" class="list">
              <h3>Currently reading</h3>
-             <div id="currentlyReadingList">
-             </div>
+             <div id="currentlyReadingList"></div>
+            </div>
+            <div id="list3" class="list">
              <h3>Finished</h3>
-             <div id="finishedList">
-             </div>
+             <div id="finishedList"></div>
+            </div>
+            </div>
     </body>
 </html>
