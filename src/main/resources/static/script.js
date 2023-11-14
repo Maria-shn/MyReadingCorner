@@ -58,10 +58,37 @@ function updateList(listId, books) {
         var ul = document.createElement('ul');
         books.forEach(book => {
             var li = document.createElement('li');
-            li.textContent = `${book.name} by ${book.author}`;
+            li.textContent = `${book.id} ${book.name} by ${book.author}`;
             ul.appendChild(li);
         });
         listContainer.appendChild(ul);
+    }
+}
+
+async function updateBookStatus() {
+    var bookId = document.getElementById("updateId").value;
+    var newStatus = document.getElementById("updateStatus").value;
+    console.log('Book ID:', bookId);
+    console.log('New Status:', newStatus);
+
+    try {
+        // Make a PUT request to update the book status
+        const response = await fetch(`/books/${bookId}?status=${newStatus}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            alert('Status updated successfully!');
+            updateBookLists(); // Refresh book information after update
+        } else {
+            const errorData = await response.json();
+            alert('Error updating status: ' + errorData.message);
+        }
+    } catch (error) {
+        console.error('Error:', error);
     }
 }
 

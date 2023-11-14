@@ -38,10 +38,10 @@ public class MainController {
         return ResponseEntity.status(HttpStatus.CREATED).body(book);
     }
 
-    @PutMapping("/{id}/status")
+    @PutMapping("/{id}")
     public Book updateBookStatus(@PathVariable Integer id, @RequestParam String status) {
         Book book = bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book not found"));
-
+        System.out.println(status);
         book.setStatus(status);
         return bookRepository.save(book);
     }

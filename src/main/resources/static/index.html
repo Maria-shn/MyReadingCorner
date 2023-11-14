@@ -24,14 +24,26 @@
         
             <button type="button" onclick="addBook()">Add Book</button>
         </form>
-        <div id="wantToReadList">
+        <form id="updateForm">
+            <label for="id">ID:</label>
+            <input type="text" id="updateId" required>
+        
+            <label for="status">Status:</label>
+            <select id="updateStatus">
+                <option value="Want To Read">Want To Read</option>
+                <option value="Currently Reading">Currently Reading</option>
+                <option value="Finished">Finished</option>
+            </select>
+            <button type="button" onclick="updateBookStatus()">Update Status</button>
+        </form>
             <h3>Want to read</h3>
-        </div>
-        <div id="currentlyReadingList">
-            <h3>Currently reading</h3>
-        </div>
-        <div id="finishedList">
-            <h3>Finished</h3>
-        </div>
+            <div id="wantToReadList">
+             </div>
+             <h3>Currently reading</h3>
+             <div id="currentlyReadingList">
+             </div>
+             <h3>Finished</h3>
+             <div id="finishedList">
+             </div>
     </body>
 </html>
